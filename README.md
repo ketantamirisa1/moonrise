@@ -211,10 +211,7 @@ Vite, React, plain CSS, SunCalc, the Open-Meteo forecast and geocoding APIs, and
 
 **How it was made, and what AI was used.** Moonrise was built overnight at a hackathon ("Fly me
 to the moon") by two people working with two AI coding agents: Claude Code on the engine and
-integrations, and Codex on the UI. The agents coordinated through a GitHub issue. The two
-illustrations (a night lake and a lunar-surface texture) are original images generated with
+integrations, and Codex on the UI. The agents coordinated via human oversight from two students through a GitHub issue. The two illustrations (a night lake and a lunar-surface texture) are original images generated with
 Higgsfield; `DESIGN.md` records the prompts, job IDs and where they're used. The moon's
-phase on screen is computed live, and the artwork is decorative. At runtime, the only AI is
-the optional caregiver-reviewed memory prompts (Claude via Anthropic in the hosted app, or OpenAI through the separately launched laptop demo gateway). The dusk
-estimate, start time, song ranking and built-in prompts are the rules and templates
-described above, not a model.
+phase on screen is computed live, and the artwork is decorative. At runtime, the AI used is
+the caregiver-reviewed memory prompts. The dusk estimate, start time, song ranking and built-in prompts are the rules and templates described above, not a model.
