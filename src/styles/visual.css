@@ -102,10 +102,10 @@
   .record-art::before { content:''; position:absolute; inset:0; border-radius:50%; background:conic-gradient(transparent,#e5e1bd30,transparent 30%,transparent 50%,#e5e1bd2c,transparent 80%); }
   .record-art span { width:32%; height:32%; border:10px solid #b9bea5; border-radius:50%; background:#1a2423; z-index:1; }
   .personal-note .text-action { width:100%; }
-  .today-footer { display:flex; justify-content:space-between; align-items:center; gap:28px; border-top:1px solid #c3cfc029; padding-top:28px; margin-top:40px; }
+  .today-footer { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; gap:28px; border-top:1px solid #c3cfc029; padding-top:28px; margin-top:40px; }
   .reminder-line { display:flex; flex-wrap:wrap; align-items:center; gap:18px; max-width:540px; }
   .reminder-line p,.care-note { margin:0; }
-  .care-note { text-align:right; max-width:520px; }
+  .care-note { text-align:left; max-width:520px; }
   .navbar { display:block; width:calc(100% - 32px); max-width:760px; left:50%; right:auto; transform:translateX(-50%); bottom:16px; border:1px solid #9cafa53d; border-radius:22px; background:#151d20f5; box-shadow:0 10px 40px #0008; backdrop-filter:blur(18px); padding:5px; padding-bottom:max(5px,env(safe-area-inset-bottom)); z-index:10; }
   .nav-tabs { display:grid; grid-template-columns:repeat(4,1fr); }
   .nav-btn { min-width:48px; min-height:70px; border-radius:16px; gap:5px; color:#b9c2c3; font-size:20px; }
@@ -181,7 +181,7 @@
     .scene-countdown { max-width:260px; }
     .section-heading h2 { font-size:32px; }
     .navbar { top:0; left:0; bottom:0; right:auto; transform:none; width:200px; max-width:none; border-radius:0; border-width:0 1px 0 0; box-shadow:none; backdrop-filter:none; padding:32px 20px; background:#11181b; display:flex; flex-direction:column; }
-    .nav-brand { display:block; }
+    .nav-brand { display:block; margin-bottom:36px; }
     .nav-brand .brand { font-size:28px; }
     .nav-brand .moon-icon { width:27px; height:27px; }
     .nav-brand p { margin:28px 0 38px; color:#aab8b6; font-size:20px; }

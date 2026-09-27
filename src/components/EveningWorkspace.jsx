@@ -140,6 +140,6 @@ export default function EveningWorkspace({ profile, plan: raw, onSave, onStart, 
     {status && <p role="status">{status}</p>}
 
     <details className="sky-facts evening-explanation"><summary>Why focus on the evening?</summary><p>Some people living with dementia experience more confusion or distress later in the day, often called sundowning. Moonrise helps a caregiver prepare familiar activities and record what happened. It does not predict episodes or determine what caused a change.</p><p>Follow the person’s care plan for new or concerning changes. Music, conversation and quiet company are optional.</p></details>
-    <div className="evening-latest"><div><p className="eyebrow">Explore without changing your records</p><h2>One fictional evening.</h2><p>Follow Avery’s garden story, change the activity, and see the session handoff. Example sessions stay separate.</p></div><button className="btn" onClick={() => onStart('story', true)}>Try a fictional session <span aria-hidden="true">↗</span></button></div>
+    <div className="evening-latest"><div><p className="eyebrow">Separate example profile</p><h2>Avery’s fictional evening.</h2><p>Avery is a fictional person in this walkthrough. Explore the garden story and session handoff without changing the profile or recorded evenings for {name}.</p></div><button className="btn" onClick={() => onStart('story', true)}>Try a fictional session <span aria-hidden="true">↗</span></button></div>
   </section>
 }
