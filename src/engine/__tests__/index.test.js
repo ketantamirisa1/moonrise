@@ -14,7 +14,7 @@ const FUNCTIONS = [
   'generateDemoWeek',
   'loadState', 'saveState', 'addLog', 'addDemoLogs', 'clearDemoLogs', 'emptyState',
   'loadAiKey', 'saveAiKey', 'clearAiKey',
-  'generateMemoryPrompts', 'AiPromptError',
+  'generateMemoryPrompts', 'cleanGeneratedPrompts', 'AiPromptError',
   'songEvidence', 'evidenceText', 'progress', 'realProgress', 'songVideo',
   'cleanCareContext', 'comfortStepsText', 'logsForHandoff', 'handoffCoverage',
 ]

@@ -21,3 +21,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - name: Build hosted judge demo
+        run: npm run build
+        env:
+          VITE_HOSTED_AI: 'true'
+          VITE_BASE: '/'

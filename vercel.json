@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "VITE_HOSTED_AI=true VITE_BASE=/ npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/ai/generate.js": { "maxDuration": 40 },
+    "api/ai/status.js": { "maxDuration": 10 }
+  },
+  "headers": [
+    { "source": "/sw.js", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/api/:path*", "headers": [{ "key": "Cache-Control", "value": "no-store" }] }
+  ]
+}

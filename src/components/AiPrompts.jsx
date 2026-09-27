@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AiPromptError, clearAiKey, generateMemoryPrompts, loadAiKey, saveAiKey } from '../engine/index.js'
 import { generateLocalPrompts, localAiStatus } from './localAi.js'
+import { generateHostedPrompts, hostedAiStatus, isHostedAiBuild } from './hostedAi.js'
 
 // Drafts stay in this screen's memory. Only an explicit approval enters app state.
 export default function AiPrompts({ state, update, saveError = false, generatePrompts = generateMemoryPrompts }) {
@@ -39,7 +40,7 @@ export default function AiPrompts({ state, update, saveError = false, generatePr
     const refresh = () => {
       const id = ++check
       setConnectionChecked(false)
-      return localAiStatus().then(status => {
+      return (isHostedAiBuild() ? hostedAiStatus() : localAiStatus()).then(status => {
         if (live && id === check) { setLocal(status); setConnectionChecked(true) }
       })
     }
@@ -97,7 +98,7 @@ export default function AiPrompts({ state, update, saveError = false, generatePr
     setMessage('Writing a few prompts for you to review…')
     try {
       const prompts = local
-        ? await generateLocalPrompts(state.profile, { existing: approved })
+        ? await (local.hosted ? generateHostedPrompts : generateLocalPrompts)(state.profile, { existing: approved })
         : await generatePrompts(state.profile, { apiKey: savedKey, existing: approved })
       if (id !== request.current) return
       setDrafts(prompts)
@@ -131,7 +132,11 @@ export default function AiPrompts({ state, update, saveError = false, generatePr
       <p>A familiar place. A favorite sound. Choose the invitations that feel right for your person.</p>
       <p className="muted">Optional suggestions, always reviewed by you. Built-in starters are ready without a connection.</p>
 
-      {local ? <details className="ai-key-details">
+      {local?.hosted ? <details className="ai-key-details">
+        <summary>About generated suggestions</summary>
+        <p>OpenAI drafts these suggestions through Moonrise’s hosted connection. They may contain mistakes. Review each one before sharing it.</p>
+        <p className="muted">No personal API key is needed. For this demonstration, use fictional details. Saved starters work without a connection.</p>
+      </details> : local ? <details className="ai-key-details">
         <summary>{local.configured ? 'Suggestion connection · manage' : 'Connect optional suggestions'}</summary>
         <p>Drafts are generated with OpenAI and may contain mistakes. A connected key is checked when you generate, not when it is saved.</p>
         <p className="muted">The key stays in this laptop’s local server memory. Disconnect on the connection page or stop the server to remove it; clearing browser data does not disconnect this local key.</p>
@@ -152,10 +157,10 @@ export default function AiPrompts({ state, update, saveError = false, generatePr
         </form>
       </details>}
 
-      <p id="ai-privacy" className="suggestion-privacy">When you tap Generate, your birth year and any hometown, spouse and job answers go to {local ? 'OpenAI through this laptop’s local server' : 'Anthropic'} to generate drafts. Those answers can identify someone. Your profile name, coordinates and evening logs are not sent.</p>
+      <p id="ai-privacy" className="suggestion-privacy">When you tap Generate, your birth year and any hometown, spouse and job answers go to {local?.hosted ? 'OpenAI through Moonrise’s Vercel-hosted server' : local ? 'OpenAI through this laptop’s local server' : 'Anthropic'} to generate drafts. Those answers can identify someone. Your profile name, coordinates and evening logs are not sent.</p>
       <button className="btn primary" onClick={generate} disabled={!canGenerate || busy || drafts.length > 0}
         aria-describedby="ai-privacy">{busy ? 'Writing prompts…' : 'Generate prompts'}</button>
-      {!canGenerate && <p className="muted">{!connectionChecked ? 'Checking the optional connection…' : local ? 'Connect a key above to generate prompts.' : 'Add a key above to generate prompts.'}</p>}
+      {!canGenerate && <p className="muted">{!connectionChecked ? 'Checking the optional connection…' : local?.hosted ? 'New suggestions are temporarily unavailable. Built-in and approved starters still work.' : local ? 'Connect a key above to generate prompts.' : 'Add a key above to generate prompts.'}</p>}
       {statusMessage && <p className="status" role="status">{statusMessage}</p>}
       {error && <p className="status" role="alert">{error}</p>}
       {saveError && <div className="status">

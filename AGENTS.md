@@ -12,7 +12,7 @@ It is caregiver support, not a medical treatment. Never claim it treats or preve
 - Secondary: the person with dementia, who only ever sees Moonrise mode. No text they need to read, no buttons they need to press.
 
 ## Stack and constraints
-- Single-page web app. Vite + React + plain CSS. No hosted backend or login. The user authorized an optional laptop-only OpenAI gateway in `local-ai/`; bind it only to 127.0.0.1, keep keys in server memory, retain the strict request/profile limits and caregiver approval gate, and never deploy it as a public proxy. The hosted Anthropic path stays unchanged.
+- Single-page web app. Vite + React + plain CSS. The user is now preparing a Vercel judge demo in their own fork. Its separate `api/ai/` and `server/hosted-ai.mjs` adapter keeps the OpenAI key server-side, bounds requests and preserves review before use; see HOSTING.md. Do not deploy or merge main without authorization. The existing laptop-only gateway in `local-ai/` must remain bound only to 127.0.0.1; never expose its setup/disconnect endpoints publicly. Ordinary non-Vercel builds retain the existing Anthropic option.
 - State in localStorage, wrapped in try/catch.
 - Weather and sun: Open-Meteo API (free, no key). Daily sunset, hourly cloud_cover for the user's lat/lon.
 - Moon position and phase: SunCalc (npm).

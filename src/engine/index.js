@@ -29,7 +29,7 @@ export {
   saveAiKey,
   clearAiKey,
 } from './storage.js'
-export { generateMemoryPrompts, AiPromptError, AI_MODEL } from './ai.js'
+export { generateMemoryPrompts, cleanGeneratedPrompts, AiPromptError, AI_MODEL } from './ai.js'
 export { songEvidence, evidenceText } from './learning.js'
 export { progress, realProgress } from './progress.js'
 export { songVideo } from './video.js'
