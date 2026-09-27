@@ -1,8 +1,11 @@
 # Moonrise judge demo on Vercel
 
-This branch adds a separate hosted OpenAI adapter. It is not deployed merely by adding
-these files. Live provider access, Vercel function routing, firewall behavior and the final
-judge URL must be checked after deployment. The original laptop server remains local-only.
+This fork adds a separate hosted OpenAI adapter. The owner deployed it at
+https://moonrise-kappa.vercel.app/ on September 27, 2026. A live fictional-profile test
+generated six drafts, skipped five, approved one, retained it after reload and displayed
+it in the session. Finish returned to the evening log. No patient testing is claimed.
+The original laptop server remains local-only. For future deployments, repeat the
+provider, routing and rate-limit checks below; the live test did not exhaust the rate limit.
 
 ## Before import
 

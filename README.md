@@ -17,10 +17,13 @@ reflect associations in those logs, not proof that a song helps. No clinical pre
 > treat or prevent anything. Sudden changes in evening behaviour can have medical causes
 > (pain, infection, medication), so mention them to a doctor.
 
-The hosted app needs no hardware, account or backend. It is a web app (PWA) that runs on any tablet or phone. An optional laptop-only OpenAI demo gateway is described below; it is not deployed with the hosted app.
+The core app needs no special hardware or account. This fork's Vercel deployment includes a private server-side OpenAI adapter for optional conversation starters. Visitors do not enter an API key. Profiles and evening records remain in the browser. The separate laptop-only gateway described below is not needed to use this hosted demo.
 
-**Try it:** https://kanishksatish.github.io/moonrise/ · step-by-step test guide: [TESTING.md](TESTING.md).
+**Try this fork's live app:** https://moonrise-kappa.vercel.app/ · step-by-step test guide: [TESTING.md](TESTING.md).
+**Original shared team project:** https://github.com/kanishksatish/moonrise · original core-app deployment: https://kanishksatish.github.io/moonrise/.
 **Devpost submission package** (copy-paste text + screenshots): [submission/DEVPOST.md](submission/DEVPOST.md).
+
+**Try the hosted AI:** enter fictional profile details → Settings → Generate prompts → review each draft with Approve or Skip → Today → A familiar story → Start Moonrise now. The hosted flow was checked with a fictional profile on September 27: six drafts, five skipped, one approved, saved after reload and displayed in the session. Generation needs internet and available API balance. See [HOSTING.md](HOSTING.md) for setup and limits. The hosted fork's test suite has 540 tests.
 
 **No patient data** was used to build or test Moonrise. Demo data is fictional and labelled; a caregiver's
 own records stay in their browser. A separate public-dataset research benchmark (TIHM) is described in
@@ -77,8 +80,9 @@ the optional demo week is explicitly labelled.
   playable songs. **Play a music file** uses a temporary local file without uploading or
   assigning it a catalog ID. Nothing autoplays; changing a recording, Quiet view, and Finish
   stop playback. Full recording/source/license details are in `src/assets/audio/catalog.json`.
-- **AI-written memory prompts (optional).** In Settings, a caregiver can add their own
-  Anthropic API key and tap Generate. Claude Haiku 4.5 (`claude-haiku-4-5`) then drafts a few gentle,
+- **AI-written memory prompts (optional).** In this fork's Vercel build, Settings → Generate
+  uses server-side OpenAI `gpt-4.1-mini-2025-04-14` through the Responses API. The original
+  static build retains a caregiver-supplied Anthropic key with Claude Haiku 4.5 (`claude-haiku-4-5`). Both draft
   personal memory prompts from the person's birth year and the optional anchors (hometown,
   spouse's first name, job). The caregiver reviews them and approves the ones they like;
   only approved prompts appear in Moonrise mode, alongside the built-in templates. Prompts
@@ -113,17 +117,18 @@ with a 20-photo limit. Original file names and metadata are not retained. Past s
 references to their original photos and plans. Browser storage can be cleared or evicted; this
 is not a clinical record system or a backup. Photos, prepared stories, caregiver preferences
 and session events are excluded from generation requests.
-The hosted app has no Moonrise account or backend. Its network calls are weather and city lookups (Open-Meteo, which receives
+The app has no Moonrise account. Its network calls are weather and city lookups (Open-Meteo, which receives
 coordinates or a city name), YouTube when the caregiver explicitly loads an available player, and,
-only if the caregiver sets up AI prompts and taps Generate, one request to the Anthropic
-API with the birth year and the optional hometown, spouse and job answers. The profile
+only if the caregiver taps Generate, a request through the Vercel-hosted adapter to OpenAI
+with the birth year and optional hometown, spouse and job answers. The profile
 name, coordinates and evening logs are not sent. Anchors may themselves contain personal
-names and places; the Settings screen explains the transfer before Generate. The API key
-is stored in this browser, separately from app data, and sent to Anthropic to authenticate
-requests. It is never bundled into the app, printed or included in the evening logs.
-Because the browser calls the API directly, this is a prototype setup; a public release
-would need a different key-management design. Use a dedicated demo key, remove it after
-using a shared device, and do not commit it. Delete all data also removes the saved key.
+names and places; the Settings screen explains the transfer before Generate. In this hosted
+build, the owner's key remains in Vercel's private environment and is used only by the server.
+It is not sent to visitors, bundled into the app, printed or included in evening logs.
+OpenAI requests use store:false; that does not promise zero provider retention. Vercel processes
+the request as well. The public demo has request and spending controls but is not a clinical
+record system. The original static build instead calls Anthropic directly with a caregiver's
+key saved in that browser; Delete all data removes that saved browser key.
 YouTube receives playback/device information and may show ads or use cookies; privacy-enhanced
 mode limits personalization but does not eliminate data sharing. No profile name, anchors or
 logs are sent to YouTube. Included recordings are served with the app; selected local audio stays in

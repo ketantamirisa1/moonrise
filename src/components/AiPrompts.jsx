@@ -129,8 +129,8 @@ export default function AiPrompts({ state, update, saveError = false, generatePr
     <section className="card ai-prompts" aria-labelledby="ai-heading">
       <p className="eyebrow">Words worth sharing</p>
       <h2 id="ai-heading" ref={promptHeading} tabIndex={-1}>Conversation starters</h2>
-      <p>A familiar place. A favorite sound. Choose the invitations that feel right for your person.</p>
-      <p className="muted">Optional suggestions, always reviewed by you. Built-in starters are ready without a connection.</p>
+      <p>Generate new conversation starters from the birth year and familiar details you entered.</p>
+      <p className="muted">Approve a draft to use it in your next story session, or skip it. Built-in starters work without generation.</p>
 
       {local?.hosted ? <details className="ai-key-details">
         <summary>About generated suggestions</summary>
